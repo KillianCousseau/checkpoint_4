@@ -12,13 +12,13 @@ export default function VolumeCard({ volume }) {
           {volume.volumeInfo.title}
         </Link>
         <div className="flex justify-between">
-          <div className="flex">
+          <div className="flex truncate max-w-[28rem]">
             {volume.volumeInfo?.authors ? (
               volume.volumeInfo.authors.map((author, index) => (
-                <p className="text-ellipsis">
-                  {index ? ", " : ""}
-                  <span className="text-cactus">{author}</span>
-                </p>
+                <span className="text-cactus" key={author}>
+                  {index ? <span className="text-umber">, </span> : ""}
+                  {author.trim()}
+                </span>
               ))
             ) : (
               <p className="text-cactus">Unknown</p>
@@ -35,7 +35,7 @@ export default function VolumeCard({ volume }) {
             {volume.volumeInfo.description}
           </p>
         ) : (
-          <p>No description</p>
+          <p>No description available</p>
         )}
       </div>
     )
@@ -46,10 +46,10 @@ VolumeCard.propTypes = {
   volume: PropTypes.shape({
     id: PropTypes.string.isRequired,
     volumeInfo: PropTypes.shape({
-      authors: PropTypes.arrayOf(PropTypes.string).isRequired,
+      authors: PropTypes.arrayOf(PropTypes.string),
       title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      publishedDate: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      publishedDate: PropTypes.string,
     }),
   }).isRequired,
 };

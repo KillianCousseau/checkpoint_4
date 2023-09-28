@@ -7,11 +7,13 @@ export default function SidebarLayout({ children }) {
   return (
     <div
       className={`${
-        sidebar ? "grid grid-cols-[15rem_auto] h-full" : "flex flex-col"
+        sidebar
+          ? "overflow-y-auto max-h-screen lg:grid lg:grid-cols-[15rem_auto] lg:h-full"
+          : "flex flex-col"
       } bg-alice-blue`}
     >
       {sidebar && <Sidebar />}
-      {children}
+      <div className="max-h-screen overflow-y-scroll">{children}</div>
     </div>
   );
 }
