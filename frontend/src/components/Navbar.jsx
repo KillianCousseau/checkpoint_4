@@ -5,7 +5,7 @@ import { useSidebarContext } from "../contexts/SidebarContext";
 export default function Navbar() {
   const { sidebar, setSidebar } = useSidebarContext();
   return (
-    <nav className="flex h-[10%] items-center bg-umber text-cactus border-b-4 border-cactus">
+    <nav className="flex items-center bg-umber text-cactus border-b-4 border-cactus">
       <div className="flex gap-3">
         <button
           type="button"

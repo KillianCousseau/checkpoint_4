@@ -1,13 +1,14 @@
 import Router from "./Router";
 import Navbar from "./components/Navbar";
+import SidebarLayout from "./layouts/SidebarLayout";
 
 function App() {
   return (
-    <div className="h-screen w-screen bg-alice-blue text-cactus lg:text-xl">
+    <div className="grid-rows-[10%_90%] h-screen bg-alice-blue text-cactus lg:text-xl">
       <Navbar />
-      <div className="flex flex-col h-[90%]">
+      <SidebarLayout className="flex bg-alice-blue flex-grow">
         <Router />
-      </div>
+      </SidebarLayout>
     </div>
   );
 }

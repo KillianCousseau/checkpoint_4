@@ -7,8 +7,8 @@ export default function SidebarLayout({ children }) {
   return (
     <div
       className={`${
-        sidebar ? "grid grid-cols-[15rem_auto]" : "flex flex-col"
-      } h-full`}
+        sidebar ? "grid grid-cols-[15rem_auto] h-full" : "flex flex-col"
+      } bg-alice-blue`}
     >
       {sidebar && <Sidebar />}
       {children}

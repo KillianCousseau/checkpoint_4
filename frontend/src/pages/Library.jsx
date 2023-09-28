@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import SidebarLayout from "../layouts/SidebarLayout";
 import VolumeCard from "../components/VolumeCard";
 
 export default function Library() {
@@ -22,19 +21,27 @@ export default function Library() {
   };
 
   return (
-    <SidebarLayout>
-      <div className="flex flex-col items-center">
-        <h1 className="font-bold my-5">Library</h1>
-        <input
-          type="text"
-          onChange={(e) => setSearch(e.target.value)}
-          className="bg-alice-blue px-2 py-0.5 border-4 border-umber rounded-md w-[30rem] focus:outline-none"
-          onKeyDown={handleSearch}
-        />
-        {searchResult
-          ? searchResult.items.map((volume) => <VolumeCard key={volume.id} />)
-          : null}
-      </div>
-    </SidebarLayout>
+    <div className="flex flex-col items-center">
+      <h1 className="font-bold text-xanthous my-5">Library</h1>
+      <input
+        type="text"
+        onChange={(e) => setSearch(e.target.value)}
+        className="bg-alice-blue px-2 py-0.5 mb-10 border-4 border-umber rounded-md w-10/12 lg:w-[30rem] focus:outline-none"
+        onKeyDown={handleSearch}
+      />
+      {searchResult && (
+        <div className="w-full">
+          {searchResult?.totalItems ? (
+            <div className="flex flex-col lg:grid lg:grid-cols-3 gap-3 px-5">
+              {searchResult.items.map((volume) => (
+                <VolumeCard key={volume.id} volume={volume} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center">No result matched your research</p>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
