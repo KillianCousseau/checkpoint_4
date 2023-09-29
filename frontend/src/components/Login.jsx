@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 import expressAPI from "../services/expressAPI";
 import { useUserContext } from "../contexts/UserContext";
+import CustomModal from "./CustomModal";
 
 export default function Login() {
+  const [modal, setModal] = useState(false);
   const { setUser, setLogin } = useUserContext();
   const navigate = useNavigate();
 
@@ -18,8 +22,7 @@ export default function Login() {
       required: "An email must be registered.",
       pattern: {
         value: /^[a-z0-9.-_]+@[a-z]+\.[a-z]{2,4}$/gi,
-        message:
-          'Registered email has the wrong format. It must resemble "johndoe@example.com."',
+        message: "Registered email has the wrong format.",
       },
     },
     password: {
@@ -39,19 +42,24 @@ export default function Login() {
   const passwordRegister = register("password", registerOptions.password);
 
   const handleLogin = (registerData) => {
-    expressAPI.post("/auth/login", registerData).then((res) => {
-      if (res.status === 200) {
-        setUser(res.data);
-        localStorage.setItem("user", JSON.stringify(res.data));
-        setLogin(true);
-        navigate("/");
-      }
-    });
+    expressAPI
+      .post("/auth/login", registerData)
+      .then((res) => {
+        if (res.status === 200) {
+          setUser(res.data);
+          localStorage.setItem("user", JSON.stringify(res.data));
+          setLogin(true);
+          navigate("/");
+        }
+      })
+      .catch(() => {
+        setModal(true);
+      });
   };
 
   return (
     <form
-      className="flex flex-col items-center"
+      className="flex flex-col items-center text-xanthous font-semibold"
       onSubmit={handleSubmit(handleLogin)}
     >
       <div className="flex flex-col gap-2 mb-5">
@@ -62,8 +70,11 @@ export default function Login() {
           onChange={emailRegister.onChange}
           ref={emailRegister.ref}
           aria-invalid={errors.email ? "true" : "false"}
+          className="bg-alice-blue text-umber border-2 border-umber focus:outline-xanthous rounded-md pl-1 py-0.5"
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && (
+          <p className="text-md text-cactus">{errors.email.message}</p>
+        )}
         <label htmlFor="password">Password :</label>
         <input
           type="password"
@@ -71,8 +82,11 @@ export default function Login() {
           onChange={passwordRegister.onChange}
           ref={passwordRegister.ref}
           aria-invalid={errors.password ? "true" : "false"}
+          className="bg-alice-blue text-umber border-2 border-umber focus:outline-xanthous rounded-md pl-1 py-0.5"
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && (
+          <p className="text-md text-cactus">{errors.password.message}</p>
+        )}
       </div>
       <button
         type="submit"
@@ -80,6 +94,14 @@ export default function Login() {
       >
         Log In
       </button>
+      {modal &&
+        createPortal(
+          <CustomModal
+            closeModal={() => setModal(false)}
+            msg="Wrong credentials"
+          />,
+          document.body
+        )}
     </form>
   );
 }

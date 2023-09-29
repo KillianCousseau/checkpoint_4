@@ -8,12 +8,12 @@ export default function SidebarLayout({ children }) {
     <div
       className={`${
         sidebar
-          ? "overflow-y-auto max-h-screen lg:grid lg:grid-cols-[15rem_auto] lg:h-full"
+          ? "overflow-y-auto h-[90vh] lg:grid lg:grid-cols-[15rem_auto] lg:h-full"
           : "flex flex-col"
       } bg-alice-blue`}
     >
       {sidebar && <Sidebar />}
-      <div className="max-h-screen overflow-y-scroll">{children}</div>
+      <div className="h-[90vh] overflow-y-scroll">{children}</div>
     </div>
   );
 }

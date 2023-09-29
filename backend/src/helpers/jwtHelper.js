@@ -6,8 +6,15 @@ const encodeJWT = (payload) => {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
 };
 
-const decodeJWT = (token) => {
-  return jwt.decode(token, JWT_SECRET);
+const verifyJWT = (req, res, next) => {
+  const token = req.cookies?.auth_token;
+  const payload = jwt.verify(token, JWT_SECRET);
+
+  if (payload) {
+    req.user = payload;
+    return next();
+  }
+  return res.sendStatus(401);
 };
 
-module.exports = { encodeJWT, decodeJWT };
+module.exports = { encodeJWT, verifyJWT };

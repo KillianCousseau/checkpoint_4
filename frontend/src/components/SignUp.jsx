@@ -34,8 +34,7 @@ export default function SignUp() {
       required: "An email must be registered.",
       pattern: {
         value: /^[a-z0-9.-_]+@[a-z]+\.[a-z]{2,4}$/gi,
-        message:
-          'Registered email has the wrong format. It must resemble "johndoe@example.com."',
+        message: "Registered email has the wrong format.",
       },
     },
     password: {
@@ -80,7 +79,7 @@ export default function SignUp() {
 
   return (
     <form
-      className="flex flex-col items-center"
+      className="flex flex-col items-center text-xanthous font-semibold"
       onSubmit={handleSubmit(handleSignUp)}
     >
       <div className="flex flex-col gap-2 mb-5">
@@ -91,8 +90,11 @@ export default function SignUp() {
           onChange={usernameRegister.onChange}
           ref={usernameRegister.ref}
           aria-invalid={errors.usernameRegister ? "true" : "false"}
+          className="bg-alice-blue text-umber border-2 border-umber focus:outline-xanthous rounded-md pl-1 py-0.5"
         />
-        {errors.username && <p>{errors.username.message}</p>}
+        {errors.username && (
+          <p className="text-md text-cactus">{errors.username.message}</p>
+        )}
         <label htmlFor="email">Email :</label>
         <input
           type="text"
@@ -100,8 +102,11 @@ export default function SignUp() {
           onChange={emailRegister.onChange}
           ref={emailRegister.ref}
           aria-invalid={errors.emailRegister ? "true" : "false"}
+          className="bg-alice-blue text-umber border-2 border-umber focus:outline-xanthous rounded-md pl-1 py-0.5"
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && (
+          <p className="text-md text-cactus">{errors.email.message}</p>
+        )}
         <label htmlFor="password">Password :</label>
         <input
           type="password"
@@ -109,8 +114,11 @@ export default function SignUp() {
           onChange={passwordRegister.onChange}
           ref={passwordRegister.ref}
           aria-invalid={errors.passwordRegister ? "true" : "false"}
+          className="bg-alice-blue text-umber border-2 border-umber focus:outline-xanthous rounded-md pl-1 py-0.5"
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && (
+          <p className="text-md text-cactus">{errors.password.message}</p>
+        )}
         <label htmlFor="passwordConfirmation">Confirm your password :</label>
         <input
           type="password"
@@ -118,9 +126,12 @@ export default function SignUp() {
           onChange={passwordConfirmationRegister.onChange}
           ref={passwordConfirmationRegister.ref}
           aria-invalid={errors.passwordConfirmationRegister ? "true" : "false"}
+          className="bg-alice-blue text-umber border-2 border-umber focus:outline-xanthous rounded-md pl-1 py-0.5"
         />
         {errors.passwordConfirmation && (
-          <p>{errors.passwordConfirmation.message}</p>
+          <p className="text-md text-cactus">
+            {errors.passwordConfirmation.message}
+          </p>
         )}
       </div>
       <button

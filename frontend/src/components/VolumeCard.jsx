@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 export default function VolumeCard({ volume }) {
   return (
     volume.volumeInfo && (
-      <div className="w-full flex flex-col gap-2 text-umber border-2 border-umber rounded-md p-2 min-h-[10rem]">
-        <Link
-          to={`/books/${volume.id}`}
-          className="font-bold text-xanthous text-ellipsis"
-        >
+      <Link
+        to={`/books/${volume.id}`}
+        className="w-full flex flex-col gap-2 text-umber border-2 border-umber rounded-md p-2 min-h-[10rem]"
+      >
+        <h1 className="font-bold text-xanthous text-ellipsis">
           {volume.volumeInfo.title}
-        </Link>
+        </h1>
         <div className="flex justify-between">
           <div className="flex truncate max-w-[28rem]">
             {volume.volumeInfo?.authors ? (
@@ -37,7 +37,7 @@ export default function VolumeCard({ volume }) {
         ) : (
           <p>No description available</p>
         )}
-      </div>
+      </Link>
     )
   );
 }

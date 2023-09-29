@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../assets/logo_tsundoku.svg";
 import { useSidebarContext } from "../contexts/SidebarContext";
 
 export default function Navbar() {
   const { sidebar, setSidebar } = useSidebarContext();
+
   return (
-    <nav className="flex items-center bg-umber text-cactus border-b-4 border-cactus">
+    <nav className="h-[10vh] flex items-center bg-umber text-cactus border-b-4 border-cactus">
       <div className="flex gap-3">
         <button
           type="button"
@@ -14,7 +16,9 @@ export default function Navbar() {
         >
           <GiHamburgerMenu size={50} />
         </button>
-        <img src={logo} alt="logo" />
+        <Link to="/">
+          <img src={logo} alt="logo" className="w-30 h-20" />
+        </Link>
       </div>
     </nav>
   );

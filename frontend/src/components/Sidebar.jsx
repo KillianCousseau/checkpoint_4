@@ -13,8 +13,6 @@ export default function Sidebar() {
   useEffect(() => {
     if (user) {
       setLogin(true);
-    } else {
-      navigate("/connexion");
     }
   }, [user]);
 
@@ -31,9 +29,8 @@ export default function Sidebar() {
   return (
     <div
       className={`${
-        sidebar && "absolute h-full w-[15rem] lg:relative border-cactus"
-      } 
-           max-h-screen flex flex-col items-center justify-between bg-umber text-xanthous font-bold border-r-4 border-cactus"
+        sidebar && "absolute z-10 h-full w-[15rem] lg:relative border-cactus"
+      } h-[90vh] flex flex-col items-center justify-between bg-umber text-xanthous font-bold border-r-4 border-cactus"
       `}
     >
       {login ? (
